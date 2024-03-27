@@ -1,7 +1,8 @@
 name: Fetch Stalled Branches
 
 on:
-  schedule:
+    workflow_dispatch:
+    schedule:    
     - cron: '0 0 * * *' # Runs daily at midnight
 
 jobs:
@@ -31,6 +32,7 @@ jobs:
           echo "::set-output name=owners::$owners"
       
       - name: Send Email
+        continue-on-error: true
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.example.com
